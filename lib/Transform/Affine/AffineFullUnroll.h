@@ -1,14 +1,15 @@
 #include "mlir/Pass/Pass.h"
+#include "mlir/Dialect/Func/IR/FuncOps.h"
 
 class AffineFullUnrollPass
-    : public PassWrapper<AffineFullUnrollPass,
-                         OperationPass<mlir::func::FuncOp>> {
+    : public mlir::PassWrapper<AffineFullUnrollPass,
+                         mlir::OperationPass<mlir::func::FuncOp>> {
 private:
   void runOnOperation() override;  // implemented in AffineFullUnroll.cpp
 
-  StringRef getArgument() const final { return "affine-full-unroll"; }
+  llvm::StringRef getArgument() const final { return "affine-full-unroll"; }
 
-  StringRef getDescription() const final {
+  llvm::StringRef getDescription() const final {
     return "Fully unroll all affine loops";
   }
 };
